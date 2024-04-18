@@ -737,7 +737,7 @@ var crPopupContent = "Comfort Room";
             customMarker.isPk = true;
         
             if (crPopupContent) {
-                customMarker.bindPopup(crPopupContent);
+                customMarker.bindPopup(parPopupContent);
             }
         
             allMarkers.push(customMarker);
