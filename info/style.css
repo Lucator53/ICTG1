@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+ 
+}
+
+.container {
+    max-width: 100%;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+header {
+    background-color: #207a4d; /* Dark green */
+    color: #fff;
+    padding: 15px;
+    text-align: center;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+   
+    
+}
+
+.building-image {
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.building-image img {
+    max-width: 100%;
+    width:75%;
+    border: solid #207a4d 3px;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1)
+}
+
+.office {
+    top: 0;
+    padding-top: 0;
+    padding-left: 20px;
+    padding-right:20px;
+    border-bottom: 1px solid #165632 
+}
+
+.office h2 {
+    color: #207a4d;
+    margin-bottom: 10px;
+    border-bottom: 5px solid #207a4d; 
+    padding-bottom: 5px;
+    font-family: "Arial Black";
+}
+
+.office p {
+    color: #333;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.office ul {
+    padding-left: 20px;
+    margin-bottom: 10px;
+}
+
+.office ul li {
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.office a {
+    color: #207a4d; /* Dark green */
+    text-decoration: none;
+}
+
+.office a:hover {
+    text-decoration: underline;
+}
+
+.scroll-down-btn {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #207a4d; /* Dark green */
+    color: #fff !important;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+}
+
+.scroll-down-btn i {
+    font-size: 20px;
+}
+
+.office ul{
+    display: flex;
+    flex-direction: column;
+    list-style-type: square;
+    justify-content: center;
+}
+.office p{
+    font-size: small;
+    /* text-align: justify; */
+}
+
+section h3{
+    text-align: center;
+    color: #ffffff;
+    font-weight: 600;
+    background-color: #165632;
+    border-radius: 10px;
+    padding: 5px;
+}
+section{
+    border-bottom: 1px solid #ccc;
+}
+section h4{
+    text-align: center;
+    text-decoration: underline;
+}
+#pool:hover{
+    background-image: url('src/poo');
+}

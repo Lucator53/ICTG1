@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building Info Board</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: white;
+        }
+
+        .container {
+            max-width: 100%;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        header {
+            background-color: #207a4d; /* Dark green */
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+            border-bottom: 2px solid #165632; /* Darker green */
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+        }
+
+        .building-image {
+            position: relative;
+            padding: 20px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+
+        .building-image img {
+            max-width: 100%;
+            width: 75%;
+            border: solid #207a4d 3px;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+
+        .building-image img.active {
+            display: block;
+        }
+
+        .office {
+            top: 0;
+            padding-top: 0;
+            padding-left: 20px;
+            padding-right:20px;
+            border-bottom: 1px solid #ccc;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+        }
+
+        .office h2 {
+            color: #207a4d; /* Dark green */
+            margin-bottom: 10px;
+            border-bottom: 2px solid #207a4d; /* Dark green */
+            padding-bottom: 5px;
+            font-family: 'Archivo Black', sans-serif;
+        }
+
+        .office p {
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .office ul {
+            padding-left: 20px;
+            margin-bottom: 10px;
+        }
+
+        .office ul li {
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .office a {
+            color: #207a4d; /* Dark green */
+            text-decoration: none;
+        }
+
+        .office a:hover {
+            text-decoration: underline;
+        }
+
+        .scroll-down-btn {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #207a4d; /* Dark green */
+            color: #fff !important;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            line-height: 40px;
+            cursor: pointer;
+        }
+
+        .scroll-down-btn i {
+            font-size: 20px;
+        }
+
+        .office ul{
+            display: flex;
+            flex-direction: column;
+            list-style-type: square;
+            justify-content: center;
+        }
+
+        .office p{
+            font-size: small;
+        }
+
+        section h3{
+            text-align: center;
+            color: #ffffff;
+            font-weight: 600;
+            background-color: #165632;
+            border-radius: 10px;
+            padding: 5px;
+        }
+
+        section{
+            border-bottom: 1px solid #ccc;
+        }
+
+        section h4{
+            text-align: center;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h2>Laguna Sports Complex <br>Pool Area</h2>
+    </header>
+    <div id="pool" class="building-image">
+        <img src="src/poolin.jpg" alt="Main Building" class="active">
+        <img src="src/poolout.jpg" alt="Main Building">
+    </div>
+    <div class="office">
+        <h2>Location</h2>
+        <h4>Laguna Sports Complex, Brgy. Bubukal Santa Cruz Laguna</h4>
+        <h2>Purpose / Function</h2>
+        <h3>Used for swimming comptetions, trainings, and other swimming related activities.</h3>
+    </div>
+
+    <script>
+        const images = document.querySelectorAll('.building-image img');
+        let currentImage = 0;
+
+        function showImage(index) {
+            images.forEach((image, i) => {
+                if (i === index) {
+                    image.classList.add('active');
+                } else {
+                    image.classList.remove('active');
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const poolDiv = document.getElementById('pool');
+            poolDiv.addEventListener('click', function() {
+                currentImage = (currentImage + 1) % images.length;
+                showImage(currentImage);
+            });
+        });
+    </script>
+</body>
+</html>
