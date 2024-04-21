@@ -3,10 +3,10 @@ var map = L.map('map', {
     center: [14.25654,121.40538],
     minZoom: 17.5,
     doubleClickZoom: false,
-    // maxBounds: [
-    //     [14.2588,121.4118],  // Northeast
-    //     [14.2512,121.4000], // Southwest
-    // ],
+    maxBounds: [
+        [14.2588,121.4118],  // Northeast
+        [14.2512,121.4000], // Southwest
+    ],
 });
 
 const hotLayer = L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',{
@@ -14,10 +14,10 @@ const hotLayer = L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.p
                 maxZoom: 21,
                 minZoom: 16.5,
                 attribution: "Tiles courtesy of HOT",
-                // bounds: [
-                //     [14.2512, 121.4000], // Southwest
-                //     [14.2588, 121.4118]  // Northeast
-                // ]
+                bounds: [
+                    [14.2512, 121.4000], // Southwest
+                    [14.2588, 121.4118]  // Northeast
+                ]
                 }).addTo(map);
 
 var osmLayer = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
