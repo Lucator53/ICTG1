@@ -3,10 +3,10 @@ var map = L.map('map', {
     center: [14.25654,121.40538],
     minZoom: 17.5,
     doubleClickZoom: false,
-    maxBounds: [
-        [14.2588,121.4118],  // Northeast
-        [14.2512,121.4000], // Southwest
-    ],
+    // maxBounds: [
+    //     [14.2588,121.4118],  // Northeast
+    //     [14.2512,121.4000], // Southwest
+    // ],
 });
 
 const hotLayer = L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',{
@@ -14,10 +14,10 @@ const hotLayer = L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.p
                 maxZoom: 21,
                 minZoom: 16.5,
                 attribution: "Tiles courtesy of HOT",
-                bounds: [
-                    [14.2512, 121.4000], // Southwest
-                    [14.2588, 121.4118]  // Northeast
-                ]
+                // bounds: [
+                //     [14.2512, 121.4000], // Southwest
+                //     [14.2588, 121.4118]  // Northeast
+                // ]
                 }).addTo(map);
 
 var osmLayer = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -33,7 +33,11 @@ var osmLayer = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', 
 var esriSatellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
                 zoom: 18,
                 maxZoom: 18,
-                attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+                bounds: [
+                    [14.2512, 121.4000], // Southwest
+                    [14.2588, 121.4118]  // Northeast
+                ],
+                attribution: 'Tiles &copy; Esri'   
                 }).addTo(map);
 
 var baseLayers = {
@@ -61,7 +65,13 @@ var userLocationMarker;
         var userLocation = e.latlng;
 
         if (!userLocationMarker) {
-            userLocationMarker = L.marker(userLocation).addTo(map);
+            userLocationMarker = L.marker(userLocation, {
+                icon: L.icon({
+                    iconUrl: 'src/meoffices.png',
+                    iconSize: [32, 32],
+                    iconAnchor: [16, 32]
+                })
+            }).addTo(map);
         } else {
             userLocationMarker.setLatLng(userLocation);
         }
@@ -97,7 +107,8 @@ var userLocationMarker;
                 ],
                 routeWhileDragging: false,
                 show: true,
-                GamepadButton: false
+                GamepadButton: true,
+                fitSelectedRoutes: false 
             }).addTo(map);
         }
     }
@@ -120,7 +131,7 @@ var userLocationMarker;
     }
 
     var removeRoutingButton = L.control({position: 'bottomright'});
-    removeRoutingButton.onAdd = function (map) {
+    removeRoutingButton.onAdd = function () {
         var div = L.DomUtil.create('div', 'remove-routing-button');
         div.innerHTML = `
         <style>
@@ -147,7 +158,7 @@ function CustomMarker(map, latlng, iconUrl, popupSrc, iconSize, label, iconAncho
         iconSize: iconSize
     });
     var customMarker = L.marker(latlng, { icon: customMarkerIcon }).addTo(map);
-    
+
     var iframe = document.createElement('iframe');
         iframe.src = popupSrc;
         iframe.className = 'tae';
@@ -736,7 +747,7 @@ var crPopupContent = "Comfort Room";
         
             customMarker.isPk = true;
         
-            if (crPopupContent) {
+            if (parPopupContent) {
                 customMarker.bindPopup(parPopupContent);
             }
         
