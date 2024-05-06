@@ -263,12 +263,12 @@ markers.push({
 });
 
 markers.push({
-  name: "Admin Building",
+  name: "Admin",
   coordinates: [14.25654,121.40542],
 });
 
 markers.push({
-  name: "Administration Building",
+  name: "Annex Building",
   coordinates: [14.25654,121.40542],
 });
 
