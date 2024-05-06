@@ -417,6 +417,7 @@ nav:hover {
   .ruum {
     flex: 0 0 auto; 
     white-space: nowrap;
+    width: 10px !important;
   }
 }
 }
