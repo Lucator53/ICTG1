@@ -1,3 +1,13 @@
+document.addEventListener('DOMContentLoaded', function() {
+  const button = document.getElementById('srchbtn');
+  function handleKeyPress(event) {
+    if (event.keyCode === 13) {
+      button.click();
+    }
+  }
+  document.addEventListener('keypress', handleKeyPress);
+});
+
 $(document).ready(function () {
   var availableTags = [
     "LU 01", 
@@ -12,7 +22,7 @@ $(document).ready(function () {
     "SHS Faculty Room", 
     "LU 09", 
     "LU 10", 
-    "Records Management Office",
+    "Records Office",
     "LU 11", 
     "LU 12", 
     "Registrar's Office", 
@@ -40,6 +50,21 @@ $(document).ready(function () {
     "San Luis Gym", 
     "Multi-Purpose Gym", 
     "Pool Area",
+    "NB",
+    "MP",
+    "M.E Offices",
+    "Chemical Laboratory",
+    "Chem Lab",
+    "Bio Lab",
+    "Biological Laboratory",
+    "Physics Lab",
+    "Physical Laboratory",
+    "Automotive",
+    "Machine Shop",
+    "College of Engineering",
+    "M.E Building",
+    "Administration Building",
+    "Admin Building"
   ];
 
   $("#output").autocomplete({
