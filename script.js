@@ -1,28 +1,27 @@
 var map = L.map('map', {
     zoom: 19,
-    center: [14.25654,121.40538],
-    minZoom: 17.5,
+    center: [14.25654, 121.40538],
+    minZoom: 18,
     doubleClickZoom: false,
     maxBounds: [
-        [14.2588,121.4118],  // Northeast
-        [14.2512,121.4000], // Southwest
-    ],
+        [14.2588, 121.4118],  // Northeast
+        [14.2512, 121.4000] // Southwest
+    ]
 });
 
-const hotLayer = L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',{
-                zoom: 18,
-                maxZoom: 21,
-                minZoom: 16.5,
-                attribution: "Tiles courtesy of HOT",
-                bounds: [
-                    [14.2512, 121.4000], // Southwest
-                    [14.2588, 121.4118]  // Northeast
-                ]
-                }).addTo(map);
+var hotlayer =  L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+        zoom: 17.5,
+        maxZoom: 20,
+        attribution: "Tiles courtesy of HOT",
+        bounds: [
+            [14.2512, 121.4000], // Southwest
+            [14.2588, 121.4118]  // Northeast
+        ]
+    }).addTo(map);
 
 var osmLayer = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 zoom:18,
-                maxZoom:19,
+                maxZoom:20,
                 bounds: [
                     [14.2512, 121.4000], // Southwest
                     [14.2588, 121.4118]  // Northeast
@@ -40,112 +39,22 @@ var esriSatellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/ser
                 attribution: 'Tiles &copy; Esri'   
                 }).addTo(map);
 
-var baseLayers = {
-    "OpenStreetMap": osmLayer,
-    "Humanitarian": hotLayer,
-    "Esri Satellite": esriSatellite
-};
-
-L.control.layers(baseLayers, null, {position: 'bottomright'}).addTo(map);
-
-L.control.locate({
-    position: 'bottomright',
-    icon: 'fa fa-location-arrow',
-    drawCircle: false,
-    drawMarker: true,
-    showPopup: true
-}).addTo(map);
-map.zoomControl.setPosition('bottomright');
-
-var userLocationMarker;
-    var draggableMarker;
-    var routingControl;
-
-    map.on('locationfound', function (e) {
-        var userLocation = e.latlng;
-
-        if (!userLocationMarker) {
-            userLocationMarker = L.marker(userLocation, {
-                icon: L.icon({
-                    iconUrl: 'src/meoffices.png',
-                    iconSize: [32, 32],
-                    iconAnchor: [16, 32]
-                })
-            }).addTo(map);
-        } else {
-            userLocationMarker.setLatLng(userLocation);
-        }
-
-        if (!draggableMarker) {
-            draggableMarker = L.marker(userLocation, {
-                draggable: true
-            }).addTo(map);
-            
-            draggableMarker.on('dragend', function(e) {
-                updateRoutingWaypoints();
-            });
-        } else {
-            draggableMarker.setLatLng(userLocation);
-        }
-        
-        updateRoutingWaypoints();
-    });
-
-    function updateRoutingWaypoints() {
-        if (routingControl) {
-            var waypoints = [
-                userLocationMarker.getLatLng(), 
-                draggableMarker.getLatLng()
-            ];
-            
-            routingControl.setWaypoints(waypoints);
-        } else {
-            routingControl = L.Routing.control({
-                waypoints: [
-                    userLocationMarker.getLatLng(), 
-                    draggableMarker.getLatLng() 
-                ],
-                routeWhileDragging: false,
-                show: true,
-                GamepadButton: true,
-                fitSelectedRoutes: false 
-            }).addTo(map);
-        }
-    }
-
-    function removeRoutingControl() {
-        if (routingControl) {
-            map.removeControl(routingControl);
-            routingControl = null;
-        }
-        
-        if (userLocationMarker) {
-            map.removeLayer(userLocationMarker);
-            userLocationMarker = null;
-        }
-        
-        if (draggableMarker) {
-            map.removeLayer(draggableMarker);
-            draggableMarker = null;
-        }
-    }
-
-    var removeRoutingButton = L.control({position: 'bottomright'});
-    removeRoutingButton.onAdd = function () {
-        var div = L.DomUtil.create('div', 'remove-routing-button');
-        div.innerHTML = `
-        <style>
-            #bul:hover{
-                background-color:#929493;
-                cursor:pointer;    
-            }
-        </style>
-        <button id="bul" style="font-weight:bolder; width: 33px; background-color:white; border: solid rgba(74, 74, 74, 0.20) 1px; border-radius:10%; box-shadow: #949494 0.1px 0.1px 0.1px 1px;" onclick="removeRoutingControl()"><i class="fa-solid fa-xmark"></i></button>
-        `;
-        return div;
-    };
-    removeRoutingButton.addTo(map);
-
+ var baseLayers = {
+     "Humanitarian": hotlayer,
+     "OpenStreetMap": osmLayer,
+     "Esri Satellite": esriSatellite,
+ };
+ 
+ L.control.layers(baseLayers, null, { position: 'bottomright' }).addTo(map);
+ 
+ L.control.locate({
+     position: 'bottomright',
+     icon: 'fa fa-location-arrow',
+     drawCircle: false,
+     drawMarker: true,
+     showPopup: true
+ }).addTo(map);
+ map.zoomControl.setPosition('bottomright');
 
 var allMarkers = [];
 var allLabels = [];
@@ -606,6 +515,7 @@ office(
         var labelicon = L.marker(latlng, { icon: labelIcon }).addTo(map);
 
         customMarker.isC = true;
+        customMarker.isCL =  true;
 
         allLabels.push(labelicon)
         allMarkers.push(customMarker);
@@ -659,7 +569,7 @@ var crPopupContent = "Comfort Room";
     
         var customMarkerIcon = L.icon({
             iconUrl: iconUrl,
-            iconSize: [20,20],
+            iconSize: [15,15],
         });
         var customMarker = L.marker(latlng, { icon: customMarkerIcon }).addTo(map);
     
@@ -741,7 +651,7 @@ var crPopupContent = "Comfort Room";
         
             var customMarkerIcon = L.icon({
                 iconUrl:'src/pk.png',
-                iconSize: [20,20],
+                iconSize: [15,15],
             });
             var customMarker = L.marker(latlng, { icon: customMarkerIcon }).addTo(map);
         
@@ -821,28 +731,6 @@ var crPopupContent = "Comfort Room";
             [14.25540,121.40596],
              
         )
-    document.getElementById("rum").addEventListener("click", function () {
-        allMarkers.forEach(function (marker) {
-            if (!marker.hasOwnProperty('isSHS')) {
-                map.removeLayer(marker);
-        
-        
-                } else {
-                    map.addLayer(marker);
-                }
-            });
-        });
-        
-        document.getElementById("rum").addEventListener("click", function () {
-            allLabels.forEach(function (marker) {
-                if (!marker.hasOwnProperty('isSHSL')) {
-                    map.removeLayer(marker);
-                } else {
-                    map.addLayer(marker);
-                }
-            });
-        });
-    
         document.getElementById("parking").addEventListener("click", function () {
         allMarkers.forEach(function (marker) {
             if (!marker.hasOwnProperty('isPk')) {
@@ -1030,81 +918,49 @@ var crPopupContent = "Comfort Room";
     }).addTo(map);         
 
     polygon.bindPopup(`<i>College of Engineering<i>`);
+   
+    //! Complex
+    var polygonCoordinates = [
+        [14.255416020629681, 121.40020529310539],
+        [14.256729362699716, 121.40374793415992],
+        [14.256766953361605, 121.40388354094284],
+        [14.25677246091378, 121.40389904760605],
+        [14.256796482530149, 121.40389285136791],
+        [14.257493568904295, 121.40362913220372],
+        [14.257947194282536, 121.40490124737192],
+        [14.257138418856016, 121.40518159714401],
+        [14.257199979293134, 121.40535900598667],
+        [14.2561715995121, 121.4058435110527],
+        [14.256301089241774, 121.40616109477907],
+        [14.255886383031708, 121.40636338378971],
+        [14.255792980442493, 121.40639489114994],
+        [14.25629395752901, 121.407765976762],
+        [14.256362206744598, 121.40836903135852],
+        [14.256198314803683, 121.40879858843556],
+        [14.25642545244959, 121.40973162752499],
+        [14.256754182293335, 121.4106212924928],
+        [14.255347055603266, 121.41103261977861],
+        [14.254965651085342, 121.40996032361443],
+        [14.254347634703663, 121.41018277788226],
+        [14.253776613418083, 121.40867525113487],
+        [14.254530390673963, 121.40833757863959],
+        [14.255023387651391, 121.4081815168883],
+        [14.254528776139026, 121.40685423592942],
+        [14.254130100150292, 121.40602016049758],
+        [14.253720053783681, 121.40538232800202],
+        [14.254193439048763, 121.4043967233311],
+        [14.254044449695925, 121.4040298391352],
+        [14.254689136743139, 121.40374190524363],
+        [14.254841978076712, 121.4041930931595],
+        [14.256444353121736, 121.40354106643605],
+        [14.255206065207943, 121.40042209798918],
+        [14.255416020629681, 121.40020529310539]
+    ];
 
-    //! CR
-// var polygonCoordinates = [
-//     [14.25605,121.40622],
-//     [14.25593,121.40629],
-//     [14.25590,121.40621],
-//     [14.25602,121.40614],
-//     [14.25605,121.40622]
-// ];
+    var polygon = L.polygon(polygonCoordinates, {
+        color: 'rgba(0, 134, 57, 0.6)',     
+        fillOpacity: 0
+    }).addTo(map);         
 
-// var polygon = L.polygon(polygonCoordinates, {
-//     color: 'rgb(217, 208, 201)',       
-//     fillColor: 'rgb(217, 208, 201)', 
-//     fillOpacity: 1
-// }).addTo(map);         
-
-//! takip lang yah
-/*var polygonCoordinates = [
-    [14.25552,121.40634],
-    [14.25536,121.40596],
-    [14.25501,121.40612],
-    [14.25516,121.40650]    
-];
-
-var polygon = L.polygon(polygonCoordinates, {
-    color: 'rgb(217, 208, 201)',       
-    fillColor: 'rgb(217, 208, 201)', 
-    fillOpacity: 1
-}).addTo(map);         
-
-var polygonCoordinates = [
-    [14.25486,121.40703],
-    [14.25466,121.40711],
-    [14.25497,121.40804],
-    [14.25518,121.40796]      
-];
-
-var polygon = L.polygon(polygonCoordinates, {
-    color: 'rgb(217, 208, 201)',       
-    fillColor: 'rgb(217, 208, 201)', 
-    fillOpacity: 1
-}).addTo(map);         
-
-var polygonCoordinates = [
-    [14.25572,121.40753],
-    [14.25580,121.40779],
-    [14.25554,121.40790],
-    [14.25543,121.40763],
-    [14.25556,121.40758],
-    [14.25562,121.40773],
-    [14.25568,121.40770],
-    [14.25563,121.40755],
-];
-
-var polygon = L.polygon(polygonCoordinates, {
-    color: 'rgb(217, 208, 201)',       
-    fillColor: 'rgb(217, 208, 201)', 
-    fillOpacity: 1
-}).addTo(map);         
-
-var polygonCoordinates = [
-    [14.25431,121.40888],
-    [14.25431,121.40910],
-    [14.25432,121.40910],
-    [14.25432,121.40930],
-    [14.25426,121.409346],
-    [14.25404,121.40873],
-    [14.25415,121.40868],
-    [14.25424,121.40891]    
-];
-
-var polygon = L.polygon(polygonCoordinates, {
-    color: 'rgb(217, 208, 201)',       
-    fillColor: 'rgb(217, 208, 201)', 
-    fillOpacity: 1
-}).addTo(map);         */
 
 
