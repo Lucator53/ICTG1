@@ -1,15 +1,18 @@
 var sidebarOpen = false;
 checkScreenWidthAndCloseSidebar();
-window.addEventListener('resize', 
-checkScreenWidthAndCloseSidebar);
+window.addEventListener('resize', checkScreenWidthAndCloseSidebar);
 
-function checkScreenWidthAndCloseSidebar()   {
+function checkScreenWidthAndCloseSidebar() {
   if (window.innerWidth <= 660) {
     closeNav();
   }
 }
 
 function toggleNav() {
+  if (window.innerWidth > 660) {
+    return; // If screen width is greater than 600, exit the function
+  }
+  
   if (!sidebarOpen) {
     openNav();
   } else {
@@ -26,18 +29,19 @@ function openNav() {
 
 function closeNav() {
   if (window.innerWidth > 660) {
-    return; 
+    return;
   }
   document.getElementById("mySidebar").style.width = "0";
   document.getElementById("main").style.marginLeft = "0";
-  document.getElementById("hamburger").style.marginLeft = "0"; 
+  document.getElementById("hamburger").style.marginLeft = "0";
   sidebarOpen = false;
   document.removeEventListener('click', closeNavOnOutsideClick);
 }
 
-
 function closeNavOnOutsideClick(event) {
-  if (!event.target.matches('#mySidebar') && !event.target.matches('button')) {
-    closeNav();
+  if (window.innerWidth <= 660) {
+    if (!event.target.matches('#mySidebar') && !event.target.matches('button')) {
+      closeNav();
+    }
   }
 }
