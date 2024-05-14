@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1"> 
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.locatecontrol/dist/L.Control.Locate.min.js"></script>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.locatecontrol/dist/L.Control.Locate.min.css" />
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
+  <script src="https://cdn.jsdelivr.net/npm/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="assets/css/leaflet.css">
+  <link rel="icon" href="src/logo/LU.Cator.png" type="image/png">
+  <title>LUcator</title>
+</head>
+<style>
+#map {
+  position: absolute;
+  margin: 0 !important;
+  left: 0;
+  width: 100% !important;
+  height: 100%;
+  z-index: 1;
+  top: 0;
+  bottom: 0 !important;
+  background-color: rgb(250, 250, 250);
+  margin-bottom: 0;
+  animation: slideout 0.5s forwards;
+}
+@keyframes slideout {
+    from {
+        transform: translateY(-100px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(-10px);
+        opacity: 1;
+    }
+}
+
+.container {
+  font-family: "Trebuchet MS", sans-serif;
+  font-weight: bold;
+  text-align: center;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  max-width: 100%;
+  margin: 0 auto;
+  max-height: 150px;
+  z-index: 2;
+  animation: slideout 2s forwards;
+}
+@keyframes slideout {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+</style>
+<body>
+ 
+
+  <!--*Header-->  
+  <div class="container">
+    <h1 id="ulo">
+      <span id="logo_box"><img id="logo" src="src/logo/LU.cator(1).png">LU</span>
+      <span id="cator">CATOR</span>
+<div class="buttones">    
+    <button id="bilding" class="ruum"><i class="fa-solid fa-building"></i> Building</button>
+    <button id="opis" class="ruum"><i class="fa-regular fa-building"></i> Offices</button>
+    <button id="all" class="ruum"><i class="fa-solid fa-rotate-right"></i> All</button>
+    <button id="kmplks" class="ruum"><i class="fa-solid fa-house"></i> Complex</button>
+    <button id="parking" class="ruum"><i class="fa-solid fa-car-side"></i> Parking</button>
+    <button id="cr" class="ruum"><i class="fa-solid fa-restroom"></i> C.R</button>
+    <script>
+        const scrollableButtons = document.querySelector('.buttones');
+
+scrollableButtons.addEventListener('wheel', (e) => {
+  e.preventDefault();
+  scrollableButtons.scrollLeft += e.deltaY;
+  scrollableButtons.scrollright += e.deltaY;
+});
+    </script>
+</div>
+</h1>
+    <div class="search-container">
+      <div id="sg">
+        <div class="search-bar">
+          <input type="search" id="output" placeholder="Search..."></input>
+          <button id="srchbtn"><i class="fa fa-search"></i></button>
+          <button id="locatic"><i class="fa fa-location-arrow"></i></button>
+          <script src="assets/javascript/autocomplete.js"></script>
+        </div>
+      </div>
+    </div>
+  </div>  
+   
+  <!--? Sidebar -->
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .submenu {
+            display: none;
+            padding: 6px 6px 14px 80px;
+            margin-top: -1px;
+            text-align: left; 
+            transition: display 0.5s ease-in-out ; 
+        }
+
+        .submenu.visible {
+            display: block;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav li {
+            display: inline-block;
+            margin-right: 15px;
+            margin-top: -5px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: whitesmoke;
+        }
+
+
+
+    </style>
+    <title>Your Page Title</title>
+</head>
+<body>
+
+    <div id="main">
+        <button id="hamburger" class="hamburger" onclick="toggleNav()">&#9776;</button> 
+        <script src="assets/javascript/sidebar.js"></script>
+        </div>
+    </div>
+
+    <div class="sidebar">
+        <nav id="mySidebar" class="sidebar-container">
+    <ul class="nav-links">
+        <li>
+            <a href="#" class="logo">
+                <img src="src/logo/LU.cator(2).png" alt="">
+                <span class="nav-item">LUcator</span>
+            </a>
+        </li>
+
+        <div class="luRooms">
+        <li id="luRooms">
+            <a href="#">
+                <i class='bx bx-door-open'></i>
+                <span class="nav-item">Annex Building</span>
+                <i class='bx bxs-chevron-down'></i>
+            </a>
+            <ul class="submenu">
+                <li><a href="#" onclick="toggleNav()">LU 01</a></li>
+                <li><a href="#" onclick="toggleNav()">LU 02</a></li>
+                <li><a href="#" onclick="toggleNav()">LU 03</a></li>
+                <li><a href="#" onclick="toggleNav()">LU 04</a></li>
+                <li><a href="#" onclick="toggleNav()">LU 05</a></li>
+                <li><a href="#" onclick="toggleNav()">LU 06</a></li>
+                <li><a href="#" onclick="toggleNav()">LU 07</a></li>
+                <li><a href="#" onclick="toggleNav()">LU 08</a></li>
+                <li><a href="#" onclick="toggleNav()">LU 09</a></li>
+                <li><a href="#" onclick="toggleNav()">LU 10</a></li>
+                <li><a href="#" onclick="toggleNav()">LU 11</a></li>
+                <li><a href="#" onclick="toggleNav()">LU 12</a></li>
+                <li><a href="#" onclick="toggleNav()">LU 13</a></li>
+                <li><a href="#" onclick="toggleNav()">LU 14</a></li>
+                <li><a href="#" onclick="toggleNav()">LU 15</a></li>
+                <!-- Add more Lu submenus as needed -->
+            </ul>
+        </li>
+    </div>
+    
+    <div class="ADMIN"> 
+        <li id="ADMIN">
+            <a href="#">
+                <i class='bx bx-door-open'></i>
+                <span class="nav-item">Admin Offices</span>
+                <i class='bx bxs-chevron-down'></i>
+            </a>
+            <ul class="submenu">
+                <li><a href="#" onclick="toggleNav()">Admin Office</a></li>
+                <li><a href="#" onclick="toggleNav()">Cashier's Office</a></li>
+                <li><a href="#" onclick="toggleNav()">HRMO</a></li>
+                <li><a href="#" onclick="toggleNav()">Research Center</a></li>
+                <li><a href="#" onclick="toggleNav()">University Clinic</a></li>
+                <li><a href="#" onclick="toggleNav()">Registrar's Office</a></li>
+                <li><a href="#" onclick="toggleNav()">Records Office</a></li>
+                <li><a href="#" onclick="toggleNav()">CHS Laboratory</a></li>
+                <li><a href="#" onclick="toggleNav()">SHS Faculty Room</a></li>
+                
+                
+            </ul>
+        </li>
+    </div> 
+    <div class="Lab"> 
+        <li id="Lab">
+            <a href="#">
+                <i class='bx bxs-flask'></i>
+                <span class="nav-item">M.E. Building</span>
+                <i class='bx bxs-chevron-down'></i>
+            </a>
+            <ul class="submenu">
+                <li><a href="#" onclick="toggleNav()">Chem Lab</a></li>
+                <li><a href="#" onclick="toggleNav()">Bio Lab</a></li>
+                <li><a href="#" onclick="toggleNav()">Physics Lab</a></li>
+                <li><a href="#" onclick="toggleNav()">Automotive</a></li>
+                <li><a href="#" onclick="toggleNav()">Machine Shop</a></li>
+                
+            </ul>
+        </li>
+    </div> 
+
+    <li><a href="#" onclick="flyToMarker('Canteen'),toggleNav()">
+        <i class='bx bx-baguette'></i>
+        <span class="nav-item">Canteen</span>
+    </a></li>
+    <li><a href="#" onclick="flyToMarker('Rizal'),toggleNav()">
+        <i class='bx bx-body'></i>
+        <span class="nav-item">Rizal</span>
+    </a></li>
+
+    <li><a href="#" onclick="flyToMarker('San Luis Gym'),toggleNav()">
+        <i class='bx bx-basketball' ></i>
+        <span class="nav-item">San Luis Gym</span>
+    </a></li>
+
+    <li><a href="#" onclick="flyToMarker('Multi-Purpose Gym'),toggleNav()">
+        <i class='bx bx-cricket-ball' ></i>
+        <span class="nav-item">Multi-Purpose Gym</span>
+    </a></li>
+
+    <li><a href="#" onclick="flyToMarker('Laguna Sports Complex Pool'),toggleNav()">
+    <i class='bx bx-swim'></i>
+        <span class="nav-item">Complex Pool</span>
+    </a></li>
+
+    <li>
+        <a href="#" onclick="flyToMarker('Oreta Building'),toggleNav()">
+          <i class='bx bx-building' ></i>
+          <span class="nav-item">Oreta Building</span>
+      </a></li>
+
+      <li>
+          <a href="#" onclick="flyToMarker('Athletes Village'),toggleNav()">
+              <i class='bx bx-building-house' ></i>
+            <span class="nav-item">Athletes Village</span>
+        </a></li>
+
+      <li><a href="#" onclick="flyToMarker('New Building'),toggleNav()">
+          <i class='bx bx-buildings'></i>
+          <span class="nav-item">New Building</span>
+      </a></li>
+
+        <li id="settings">
+          <a href="#">
+              <i class="bx bx-cog"></i>
+              <span class="nav-item">Settings</span>
+              <i class='bx bxs-chevron-down'></i>
+          </a>
+          <ul class="submenu">
+              <li><a href="https://lu.edu.ph/" target="_blank">LU Website</a></li>
+              <li><a href="contact.html" target="_blank">Contact Us & About Us</a></li>
+              <li><a href="https://forms.gle/1hV5uirXSV7Rhj6P6" target="_blank">Rate Us!</a></li>
+              <li><a href="index.html">Exit</a></li>            
+        </ul>
+</nav>
+    </ul>
+
+<script src="tap.js"></script>
+
+<script>
+    // JavaScript to toggle submenu visibility
+    document.getElementById('luRooms').addEventListener('click', function(e) {
+        e.preventDefault(); // Prevent the default link behavior
+        var submenu = this.querySelector('.submenu');
+        submenu.classList.toggle('visible');
+    });
+    
+    // JavaScript to toggle submenu visibility for Settings
+    document.getElementById('ADMIN').addEventListener('click', function(e) {
+        e.preventDefault(); // Prevent the default link behavior
+        var submenu = this.querySelector('.submenu');
+        submenu.classList.toggle('visible');
+    });
+
+    // JavaScript to toggle submenu visibility for Settings
+    document.getElementById('settings').addEventListener('click', function(e) {
+        e.preventDefault(); // Prevent the default link behavior
+        var submenu = this.querySelector('.submenu');
+        submenu.classList.toggle('visible');
+
+    });
+
+    document.getElementById('Lab').addEventListener('click', function(e) {
+        e.preventDefault(); // Prevent the default link behavior
+        var submenu = this.querySelector('.submenu');
+        submenu.classList.toggle('visible');
+
+    });
+
+</script>
+
+
+<script>
+  // JavaScript to handle automatic redirection for submenu items
+  document.addEventListener('DOMContentLoaded', function() {
+      var submenuItems = document.querySelectorAll('.submenu a');
+      submenuItems.forEach(function(item) {
+          item.addEventListener('click', function(e) {
+              e.preventDefault(); // Prevent the default link behavior
+              window.location.href = this.getAttribute('href'); // Redirect to the specified URL
+          });
+      });
+  });
+</script>
+
+
+<!--!MAP-->
+<div id="map"></div>
+<script src="script.js"></script>
+<script src="search.js"></script>
+<script src="assets/javascript/sidebar.js"></script>
+
+</body>
+</html>
+</body>
+</html>
+

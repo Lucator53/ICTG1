@@ -1,5 +1,5 @@
 var map = L.map('map', {
-    zoom: 19,
+    zoom: 20,
     center: [14.25654, 121.40538],
     minZoom: 18,
     doubleClickZoom: false,
@@ -11,8 +11,7 @@ var map = L.map('map', {
 
 var hotlayer =  L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
         zoom: 17.5,
-        maxZoom: 20,
-        attribution: "Tiles courtesy of HOT",
+        maxZoom: 21,
         bounds: [
             [14.2512, 121.4000], // Southwest
             [14.2588, 121.4118]  // Northeast
@@ -21,12 +20,19 @@ var hotlayer =  L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.pn
 
 var osmLayer = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 zoom:18,
-                maxZoom:20,
+                maxZoom:19,
                 bounds: [
                     [14.2512, 121.4000], // Southwest
                     [14.2588, 121.4118]  // Northeast
                 ],
-                attribution: "© OpenStreetMap Contributors"
+                }).addTo(map);
+
+var osmFr =  L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+               maxZoom: 21,
+               bounds: [
+                [14.2512, 121.4000], // Southwest
+                [14.2588, 121.4118]  // Northeast
+            ], 
                 }).addTo(map);
 
 var esriSatellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
@@ -35,13 +41,13 @@ var esriSatellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/ser
                 bounds: [
                     [14.2512, 121.4000], // Southwest
                     [14.2588, 121.4118]  // Northeast
-                ],
-                attribution: 'Tiles &copy; Esri'   
+                ], 
                 }).addTo(map);
 
  var baseLayers = {
      "Humanitarian": hotlayer,
      "OpenStreetMap": osmLayer,
+     "OSM France": osmFr,
      "Esri Satellite": esriSatellite,
  };
  
@@ -92,7 +98,7 @@ function CustomMarker(map, latlng, iconUrl, popupSrc, iconSize, label, iconAncho
 
 CustomMarker(
     map,
-    [14.25545, 121.40073], // Gate 1
+    [14.25557,121.40067], // Gate 1
     'src/entrance.png',
     "info/gate1.html",
     [50, 30],
@@ -110,7 +116,7 @@ CustomMarker(
 
 CustomMarker(
     map,
-    [14.25571,121.40581], // Jose Rizal Monument
+    [14.255775,121.40572], // Jose Rizal Monument
     'src/RizalMon.png',
     "info/rizal.html",
     [30, 30],
@@ -203,21 +209,21 @@ SHSMarker(
 
 SHSMarker(
     map,
-    [14.25606,121.40571], //LU 08
+    [14.25613,121.40571], //LU 08
     'info/lu08.html',
     "LU 08"
 )
 
 SHSMarker(
     map,
-    [14.25631,121.40561], //LU 10
+    [14.25634,121.40560], //LU 10
     'info/lu10.html',
     "LU 10"
 )
 
 SHSMarker(
     map,
-    [14.25644,121.40554], //LU 12
+    [14.25648,121.40554], //LU 12
     'info/lu12.html',
     "LU 12"
 )
@@ -286,7 +292,7 @@ lublg(
     'src/oreta.png',
     [30,30],
     'Oreta Building',
-    [35,-20]
+    [30,-20]
 );
 
 lublg(
@@ -424,7 +430,7 @@ office(
 office(
     map,
     'src/faculty.png',
-    [14.25618,121.40565], //SHS Faculty
+    [14.25625,121.40565], //SHS Faculty
     'info/lu09.html',
     "<i>SHS Faculty Room</i>"
 )
@@ -440,7 +446,7 @@ office(
 office(
     map,
     'src/lu11.png',
-    [14.25638,121.40559], //Records Office
+    [14.25640,121.40557], //Records Office
     'info/lu11.html',
     "<i>Records Office</i>"
 )
@@ -554,7 +560,7 @@ office(
 
     complex(
         map, 
-        [14.25605,121.40601], //Canteen
+        [14.25606,121.40594], //Canteen
         'src/canteen.png',
         'info/canteen.html',
         [30,30],

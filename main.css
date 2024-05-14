@@ -34,7 +34,7 @@ nav {
   width: 80px;
   z-index: 4 !important;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  overflow-y: hidden !important;
+  overflow: hidden !important;
   transition: width 0.001s linear;
 }
 
@@ -139,6 +139,7 @@ nav:hover {
   text-align: center;
   justify-content: center;
   align-items: center;
+  top: 10px !important;
   max-width: 100%;
   margin: 0 auto;
   z-index: 2;
@@ -153,7 +154,7 @@ nav:hover {
   font-size: 180%;
   font-weight: bolder;
   color: white;
-  text-shadow: gold 5px 2px 3px;
+  text-shadow: gold 5px 2px 2px !important;
   font-family: 'Archivo Black', sans-serif;
 }
 
@@ -172,7 +173,15 @@ nav:hover {
 #cator {
   font-size: 75%;
   color: black;
-  text-shadow: white 3px 3px 3px;
+  text-shadow:
+  -1px -1px 0 #ffffff,
+  0 -1px 0 #ffffff,
+  1px -1px 0 #ffffff,
+  1px 0 0 #ffffff,
+  1px 1px 0 #ffffff,
+  0 1px 0 #ffffff,
+  -1px 1px 0 #ffffff,
+  -1px 0 0 #ffffff;
   font-family: 'Archivo Black', sans-serif;
 }
 
@@ -196,7 +205,6 @@ nav:hover {
 
 #output {
   height: 20px;
-  width: auto;
   max-width: 25px;
   margin: 0px;
   border-radius: 5px;
@@ -232,6 +240,15 @@ nav:hover {
   z-index: 1;
   cursor: pointer;
   height: 1.3rem;
+   text-shadow:
+  -1px -1px 0 #ffffff,
+  0 -1px 0 #ffffff,
+  1px -1px 0 #ffffff,
+  1px 0 0 #ffffff,
+  1px 1px 0 #ffffff,
+  0 1px 0 #ffffff,
+  -1px 1px 0 #ffffff,
+  -1px 0 0 #ffffff;
 }
 
 #srchbtn:hover {
@@ -268,13 +285,10 @@ nav:hover {
 
 .custom-marker-label {
   font-size: 9px;
-  font-family: 'Arial black';
   font-weight: bolder;
   justify-content: center;
   text-align: center;
   white-space: nowrap;
-  color: #5c2b00;
-  text-shadow: #ffffff 1px 1px 1px;
   z-index: 1000;
 }
 
@@ -283,31 +297,35 @@ nav:hover {
   font-weight: bolder;
   justify-content: center;
   text-align: center;
-  text-shadow: #ffffff 1px 1px 1px;
   white-space: nowrap;
-  color: #5c2b00;
   z-index: 1000;
 }
 .label1{
-  text-shadow: #ffffff 1px 1px 1px;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-size: 9px;
   font-weight: bolder;
   text-align: center;
-  color: #5c2b00;
   z-index: 1000;
-  font-family: 'Arial Black';
+ 
 }
 .complex{
-  text-shadow: #ffffff 1px 1px 1px;
   font-size: 9px;
   white-space: nowrap;
   font-weight: bolder;
   text-align: center;
-  color: #5c2b00;
-  font-family: 'Arial Black';
 }
-
+.custom-marker-label, .custom-marker-label2, .label1, .complex{
+  color: #ffffff;
+  text-shadow:-1px -1px 0 #000,
+  0 -1px 0 #000,
+  1px -1px 0 #000,
+  1px 0 0 #000,
+  1px 1px 0 #000,
+  0 1px 0 #000,
+  -1px 1px 0 #000,
+  -1px 0 0 #000;
+  font: 400 Roboto, Arial, sans-serif;
+  z-index: 1000 !important;
+}
 #myModal {
   display: none;
   position: fixed;
@@ -417,7 +435,7 @@ nav:hover {
   .ruum {
     flex: 0 0 auto; 
     white-space: nowrap;
-    width: 10px !important;
+    width: 20px !important;
   }
 }
 }
@@ -469,10 +487,6 @@ nav:hover {
  }
 }
 
-.leaflet-top .leaflet-control {
-  top: 300px  !important;
-}
-
 .tae{
   height: 25rem;
   width: 21rem;
@@ -481,7 +495,7 @@ nav:hover {
 @media (min-width: 500px) {
   .tae{
     height: 40rem;
-    width: 30rem ;
+    width: 35rem ;
   }  
 }
 
@@ -495,7 +509,7 @@ nav:hover {
   border: none;
   border-radius: 5px;
   position: sticky;
-  top: 10px;
+  top: 15px !important;
   left: 10px;
   margin-right: 12px;
   z-index: 5;
@@ -549,3 +563,39 @@ nav:hover {
   border-radius: 5px;
   border: 1px solid #ccc;
 }
+
+.leaflet-top .leaflet-control {
+  top: 300px  !important;
+  background-color: transparent !important;
+  color: white !important;
+  text-shadow:  -1px -1px 0 #000,
+  0 -1px 0 #000,
+  1px -1px 0 #000,
+  1px 0 0 #000,
+  1px 1px 0 #000,
+  0 1px 0 #000,
+  -1px 1px 0 #000,
+  -1px 0 0 #000 !important;
+  border: #000 1px solid;
+}
+
+#bul{
+    background-color: #fff;
+    border-bottom: 1px solid #ccc !important;
+    width: 26px;
+    height: 26px;
+    line-height: 26px;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    color: black;
+    box-shadow:-1px -1px 0 #606060,
+    0 -1px 0 #606060,
+    1px -1px 0 #606060,
+    1px 0 0 #606060,
+    1px 1px 0 #606060,
+    0 1px 0 #606060,
+    -1px 1px 0 #606060,
+    -1px 0 0 #606060 !important;
+}
+

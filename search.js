@@ -8,7 +8,7 @@ markers.push({
 
 markers.push({
   name: "Gate 1",
-  coordinates: [14.25545, 121.40073],
+  coordinates: [14.25557,121.40067],
 });
 
 markers.push({
@@ -23,7 +23,7 @@ markers.push({
 
 markers.push({
   name: "Jose Rizal Monument",
-  coordinates: [14.25571,121.40581],
+  coordinates: [14.255775,121.40572],
 });
 
 markers.push({
@@ -68,37 +68,37 @@ markers.push({
 
 markers.push({
   name: "LU 08",
-  coordinates: [14.25606,121.40571],
+  coordinates: [14.25613,121.40571],
 });
 
 markers.push({
   name: "SHS Faculty Room",
-  coordinates: [14.25618,121.40565],
+  coordinates: [14.25625,121.40565],
 });
 
 markers.push({
   name: "LU 09",
-  coordinates: [14.25618,121.40565],
+  coordinates: [14.25625,121.40565],
 });
 
 markers.push({
   name: "LU 10",
-  coordinates: [14.25631,121.40561],
+  coordinates: [14.25634,121.40560],
 });
 
 markers.push({
   name: "Records Office",
-  coordinates: [14.25638,121.40559],
+  coordinates: [14.25640,121.40557],
 });
 
 markers.push({
   name: "LU 11",
-  coordinates: [14.25638,121.40559],
+  coordinates: [14.25640,121.40557],
 });
 
 markers.push({
   name: "LU 12",
-  coordinates: [14.25644,121.40554],
+  coordinates: [14.25648,121.40554],
 });
 
 markers.push({
@@ -175,7 +175,6 @@ markers.push({
   coordinates: [14.25523,121.40620],
 });
 
-
 markers.push({
   name: "Multi-Purpose Gym",
   coordinates: [14.25467,121.40630],
@@ -184,7 +183,6 @@ markers.push({
   name: "MP",
   coordinates: [14.25467,121.40630],
 });
-
 
 markers.push({
   name: "Pool Area",
@@ -205,7 +203,7 @@ markers.push({
 
 markers.push({
   name: "Canteen",
-  coordinates: [14.25605,121.40601],
+  coordinates: [14.25606,121.40594],
 });
 
 
@@ -283,25 +281,67 @@ markers.push({
 });
 
 markers.push({
-  name: "",
+  name: "LU Website",
   coordinates: [],
 });
 
 markers.push({
-  name: "",
+  name: "Rate Us!",
   coordinates: [],
 });
 
 markers.push({
-  name: "",
+  name: "Contact Us & About Us",
   coordinates: [],
 });
 
 markers.push({
-  name: "",
+  name: "Exit",
   coordinates: [],
 });
 
+
+function zoomToMarker(markerName) {
+  console.log("Marker name:", markerName);
+  const foundMarker = markers.find(marker => marker.name === markerName);
+  if (foundMarker) {
+    console.log("Found marker:", foundMarker);
+    const maxZoomLevel = 20.3;
+    map.setView(foundMarker.coordinates, maxZoomLevel);
+    simulateMarkerClick(foundMarker);
+  } else {
+    alert("Marker not found.");
+  }
+}
+
+document.querySelectorAll('.submenu a').forEach(link => {
+  link.addEventListener('click', function(event) {
+    event.preventDefault(); 
+    const markerName = this.textContent.trim(); 
+    console.log("Clicked link:", markerName);
+    zoomToMarker(markerName); 
+
+    const parentLi = this.closest('li'); 
+    if (parentLi.id !== 'settings') {
+      const markerName = this.textContent.trim();
+      console.log("Clicked link:", markerName);
+      zoomToMarker(markerName);
+    }
+     
+  });
+});
+
+document.getElementById('output').addEventListener('keypress', function (e) {
+  if (e.key === 'Enter') {
+    const searchQuery = document.getElementById('output').value.trim();
+
+    if (searchQuery !== "") {
+      searchMarkers(searchQuery);
+    } else {
+      alert("Please enter a search query.");
+    }
+  }
+});
 
 let maxZoomReached = false;
 
@@ -310,23 +350,12 @@ function searchMarkers(query) {
 
   const formattedQuery = query.toLowerCase().replace(/[^a-z0-9]/g, '');
 
-  if (maxZoomReached) {
-    
-    const defaultZoomLevel = 12;
-    map.setView([14.25654, 121.40538], defaultZoomLevel); 
-    maxZoomReached = false;
-    setTimeout(() => {
-      searchMarkers(query);
-    }, 1000); 
-    return;
-  }
-
   markers.forEach((marker) => {
     const formattedMarkerName = marker.name.toLowerCase().replace(/[^a-z0-9]/g, '');
 
     if (formattedMarkerName.includes(formattedQuery)) {
       selectedMarker = marker;
-      const maxZoomLevel = 20; 
+      const maxZoomLevel = 20.3; 
       map.setView(marker.coordinates, maxZoomLevel);
       maxZoomReached = true;
       simulateMarkerClick(selectedMarker);
@@ -365,7 +394,7 @@ document.getElementById('locatic').addEventListener('click', function () {
   }
 });
 
-let routingControl = null; // Declare the routingControl variable outside of the locateAndRoute function
+let routingControl = null; 
 
 function locateAndRoute(searchQuery) {
   map.locate({ setView: true, maxZoom: 19 });
@@ -374,7 +403,7 @@ function locateAndRoute(searchQuery) {
     const currentPosition = e.latlng;
     let destination = null;
 
-    // Find the coordinates of the searched location
+    
     markers.forEach((marker) => {
       const formattedMarkerName = marker.name.toLowerCase().replace(/[^a-z0-9]/g, '');
       const formattedQuery = searchQuery.toLowerCase().replace(/[^a-z0-9]/g, '');
@@ -385,18 +414,18 @@ function locateAndRoute(searchQuery) {
     });
 
     if (destination) {
-      // Remove existing route layer if it exists
+     
       if (routingControl) {
         map.removeControl(routingControl);
       }
 
-      // Add new route
+     
       routingControl = L.Routing.control({
         waypoints: [
           L.latLng(currentPosition),
           destination
         ],
-        routeWhileDragging: false // Disable dragging of route line
+        routeWhileDragging: false
       }).addTo(map);
     } else {
       alert("No matching marker found for the search query.");
@@ -406,20 +435,16 @@ function locateAndRoute(searchQuery) {
   map.on('locationfound', onLocationFound);
 }
 
-// Create the marker for the user's current location with draggable set to false
+
 function createUserLocationMarker(latlng) {
   return L.marker(latlng, { draggable: false }).addTo(map);
 }
 
-
-
-// Function to remove the routing control from the map
 function removeRoutingControl() {
   if (routingControl) {
       map.removeControl(routingControl);
-      routingControl = null; // Reset the routingControl variable
+      routingControl = null;
   }
-  // Reload the page to restart the script
   location.reload();
 }
 
@@ -438,7 +463,5 @@ removeRoutingButton.onAdd = function () {
   return div;
 };
 removeRoutingButton.addTo(map);
-
-
 
 
