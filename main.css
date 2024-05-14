@@ -26,7 +26,6 @@ body {
 
 nav {
   position: absolute !important;
-  overflow-x: hidden;
   top: 0;
   bottom: 0;
   left: 0;
@@ -34,7 +33,7 @@ nav {
   width: 80px;
   z-index: 4 !important;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  overflow: hidden !important;
+  overflow: hidden;
   transition: width 0.001s linear;
 }
 
