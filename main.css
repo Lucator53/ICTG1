@@ -145,8 +145,8 @@ nav:hover {
   top: 10px !important;
   max-width: 100%;
   margin: 0 auto;
-  z-index: 10;
-  /* animation: slideout 2s forwards; */
+  z-index: 2;
+  animation: slideout 2s forwards;
 }
 
 #sg {
@@ -166,11 +166,11 @@ nav:hover {
 }
 
 .search-container {
-  display: grid;
+  display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  z-index: 5;
+  z-index: 3;
 }
 
 .search-bar {
@@ -355,18 +355,19 @@ nav:hover {
 }
 
 .buttones{
-  flex-wrap: nowrap; 
-  overflow-x: auto; 
-  justify-content: flex-end; 
-  z-index: 2;
-  padding: 5px;
-  position: relative;
-  display: grid;
-  align-self: self-end;
-  gap: 10px;
-  transform: translateY(-10%) !important;
-  animation: slidein 2s forwards;
-  border-radius: 5% 0 0 5%;
+    z-index: 2;
+    padding: 5px;
+    position: absolute;          
+    top: 80px;                    
+    right: 1px;                  
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+    max-width: 80px;              
+    max-height: 90vh;            
+    overflow-y: auto;            
+    border-radius: 5% 0 0 5%;
 }
 
 #buttones{
@@ -378,12 +379,11 @@ nav:hover {
   position: relative;
   display: grid;
   align-self: self-end;
-  animation: slideout 2s forwards;
   gap: 10px;
-
+  
 }
 
-#toggleButtons, #toggleButtons i {
+#toggleButtons {
   z-index: 3;
   margin: 5px;
   position: relative;
