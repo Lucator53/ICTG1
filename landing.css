@@ -125,22 +125,10 @@ button:hover {
 }
 
 .logo {
-  border-radius: 50%;
   margin-top: 100px !important;
-  height: 20vw;
-  width: 20vw;
+  height: 20svw;
+  width: auto;
   display: block;
-  margin: 60px auto;
-  /* animation: heartbeat 1.5123s infinite alternate;
-}
-
-@keyframes heartbeat {
-  from {
-    transform: scale(1.20);
-  }
-  to {
-    transform: scale(1);
-  } */
 }
 
 .banner a {
@@ -180,16 +168,6 @@ button:hover {
     width: 100%;
   }
 
-  .logo {
-    height: 250px;
-    width: 250px;
-    display: block;
-    margin: 20px auto;
-    position: relative;
-    top: 10px;
-    position: absolute !important;
-  }
-
   .banner a {
     left: 5% !important;
     bottom: 5% !important;
@@ -200,11 +178,6 @@ button:hover {
   .content {
     margin-top: 5px;
   }
-  .logo {
-    margin-top: 100px;
-    height: 290px;
-    width: 290px;
-  }
   .content h1 {
     font-size: 15vw;
   }
@@ -213,12 +186,6 @@ button:hover {
   }
 }
 
-@media (min-width: 400px) and (max-width: 800px) {
-  .logo {
-    height: 280px;
-    width: 280px;
-  }
-}
 
 @media (max-width: 400px) {
   .banner a {

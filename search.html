@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Find in Page Example</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .highlight {
+      background-color: yellow;
+      font-weight: bold;
+    }
+    input[type="text"] {
+      padding: 5px;
+      width: 200px;
+    }
+    button {
+      padding: 5px 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Find in Page</h2>
+  <input type="text" id="searchInput" placeholder="Search text...">
+  <button onclick="findText()">Find</button>
+
+  <p id="content">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+    Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. 
+    Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum.
+  </p>
+
+  <script>
+    function findText() {
+      const input = document.getElementById("searchInput").value;
+      const content = document.getElementById("content");
+
+      // Reset previous highlights
+      const originalText = content.textContent;
+      content.innerHTML = originalText;
+
+      if (input.trim() === "") return;
+
+      const regex = new RegExp(`(${input})`, "gi");
+      content.innerHTML = content.innerHTML.replace(regex, '<span class="highlight">$1</span>');
+
+      // Scroll to first match
+      const firstMatch = document.querySelector(".highlight");
+      if (firstMatch) {
+        firstMatch.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    }
+  </script>
+
+</body>
+</html>

@@ -17,6 +17,7 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
   <script src="https://cdn.jsdelivr.net/npm/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="stylesheet" href="main.css">
   <link rel="stylesheet" href="assets/css/leaflet.css">
   <link rel="icon" href="src/logo/LU.Cator.png" type="image/png">
@@ -76,38 +77,56 @@
 
   <!--*Header-->  
   <div class="container">
-    <h1 id="ulo">
-      <span id="logo_box"><img id="logo" src="src/logo/LU.cator(1).png">LU</span>
-      <span id="cator">CATOR</span>
-<div class="buttones">    
-    <button id="bilding" class="ruum"><i class="fa-solid fa-building"></i> Building</button>
-    <button id="opis" class="ruum"><i class="fa-regular fa-building"></i> Offices</button>
-    <button id="all" class="ruum"><i class="fa-solid fa-rotate-right"></i> All</button>
-    <button id="kmplks" class="ruum"><i class="fa-solid fa-house"></i> Complex</button>
-    <button id="parking" class="ruum"><i class="fa-solid fa-car-side"></i> Parking</button>
-    <button id="cr" class="ruum"><i class="fa-solid fa-restroom"></i> C.R</button>
-    <script>
-        const scrollableButtons = document.querySelector('.buttones');
-
-scrollableButtons.addEventListener('wheel', (e) => {
-  e.preventDefault();
-  scrollableButtons.scrollLeft += e.deltaY;
-  scrollableButtons.scrollright += e.deltaY;
-});
-    </script>
-</div>
-</h1>
-    <div class="search-container">
-      <div id="sg">
-        <div class="search-bar">
-          <input type="search" id="output" placeholder="Search..."></input>
-          <button id="srchbtn"><i class="fa fa-search"></i></button>
-          <button id="locatic"><i class="fa fa-location-arrow"></i></button>
-          <script src="assets/javascript/autocomplete.js"></script>
-        </div>
-      </div>
+    <div class="lucator">
+        <!-- <img src="src/logo/lucator galgalin.png"> -->
+        <img src="src/logo/lucator spartan 3.png" alt="">
     </div>
-  </div>  
+    <div class="search-container">
+        <div id="sg">
+            <div class="search-bar">
+                <input type="search" id="output" placeholder="Search..."></input>
+                <button id="srchbtn"><i class="fa fa-search"></i></button>
+                <button id="locatic"><i class="fa fa-location-arrow"></i></button>
+                <script src="assets/javascript/autocomplete.js"></script>
+            </div>
+        </div>
+</div>
+</div>  
+
+<div class="buttones">    
+    <button onclick="toggleButtons()" id="toggleButtons" class="btn btn-secondary" title="Hide Buttons">
+        <i class="fa-solid fa-eye-slash"></i>
+    </button>
+
+    <div id="buttones">
+        <button title="University Buildings" id="bilding" class="btn btn-success"><i class="fa-solid fa-building"></i></button>
+        <button title="University Offices" id="opis" class="btn btn-success"><i class="fa-regular fa-building"></i></button>
+        <button title="Reset" id="all" class="btn btn-success"><i class="fa-solid fa-rotate-right"></i></button>
+        <button title="Complex" id="kmplks" class="btn btn-success"><i class="fa-solid fa-house"></i></button>
+        <button title="Parking Areas" id="parking" class="btn btn-success"><i class="fa-solid fa-car-side"></i></button>
+        <button title="Comfort Rooms" id="cr" class="btn btn-success"><i class="fa-solid fa-restroom"></i></button>
+    </div>
+</div>
+
+<script>
+    function toggleButtons() {
+        const buttonsDiv = document.getElementById('buttones');
+        const toggleBtn = document.getElementById('toggleButtons');
+        
+        if (buttonsDiv.style.visibility === 'hidden') {
+            buttonsDiv.style.visibility = 'visible';
+            buttonsDiv.style.animation = 'slideout 1s forwards'
+            toggleBtn.title = 'Hide Buttons';
+            toggleBtn.innerHTML = '<i class="fa-solid fa-eye-slash"></i>';
+        } else {
+            buttonsDiv.style.visibility = 'hidden';
+            buttonsDiv.style.visibility = 'hidden';
+            buttonsDiv.style.animation = 'none'
+            toggleBtn.title = 'Show Buttons';
+            toggleBtn.innerHTML = '<i class="fa-solid fa-eye"></i>';
+        }
+    }
+</script>
    
   <!--? Sidebar -->
   <!DOCTYPE html>
@@ -148,7 +167,6 @@ scrollableButtons.addEventListener('wheel', (e) => {
 
 
     </style>
-    <title>Your Page Title</title>
 </head>
 <body>
 
@@ -164,7 +182,7 @@ scrollableButtons.addEventListener('wheel', (e) => {
         <li>
             <a href="#" class="logo">
                 <img src="src/logo/LU.cator(2).png" alt="">
-                <span class="nav-item">LUcator</span>
+                <span class="nav-item">Explore</span>
             </a>
         </li>
 

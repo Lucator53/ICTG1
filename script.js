@@ -5,51 +5,54 @@ var map = L.map('map', {
     doubleClickZoom: false,
     maxBounds: [
         [14.2588, 121.4118],  // Northeast
-        [14.2512, 121.4000] // Southwest
+        [14.2512, 121.4000]   // Southwest
     ]
 });
 
-var hotlayer =  L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
-        zoom: 17.5,
-        maxZoom: 21,
-        bounds: [
-            [14.2512, 121.4000], // Southwest
-            [14.2588, 121.4118]  // Northeast
-        ]
-    }).addTo(map);
+// Only add the Humanitarian layer by default
+var hotlayer = L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+    zoom: 17.5,
+    maxZoom: 21,
+    bounds: [
+        [14.2512, 121.4000], // Southwest
+        [14.2588, 121.4118]  // Northeast
+    ]
+}).addTo(map);
 
+// Do not add the other layers immediately
 var osmLayer = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                zoom:18,
-                maxZoom:19,
-                bounds: [
-                    [14.2512, 121.4000], // Southwest
-                    [14.2588, 121.4118]  // Northeast
-                ],
-                }).addTo(map);
+    zoom: 18,
+    maxZoom: 19,
+    bounds: [
+        [14.2512, 121.4000], // Southwest
+        [14.2588, 121.4118]  // Northeast
+    ]
+});
 
-var osmFr =  L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
-               maxZoom: 21,
-               bounds: [
-                [14.2512, 121.4000], // Southwest
-                [14.2588, 121.4118]  // Northeast
-            ], 
-                }).addTo(map);
+var osmFr = L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+    maxZoom: 21,
+    bounds: [
+        [14.2512, 121.4000], // Southwest
+        [14.2588, 121.4118]  // Northeast
+    ]
+});
 
 var esriSatellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-                zoom: 18,
-                maxZoom: 18,
-                bounds: [
-                    [14.2512, 121.4000], // Southwest
-                    [14.2588, 121.4118]  // Northeast
-                ], 
-                }).addTo(map);
+    zoom: 18,
+    maxZoom: 18,
+    bounds: [
+        [14.2512, 121.4000], // Southwest
+        [14.2588, 121.4118]  // Northeast
+    ]
+});
 
- var baseLayers = {
-     "Humanitarian": hotlayer,
-     "OpenStreetMap": osmLayer,
-     "OSM France": osmFr,
-     "Esri Satellite": esriSatellite,
- };
+// Define base layers for switching
+var baseLayers = {
+    "Humanitarian": hotlayer,
+    "OpenStreetMap": osmLayer,
+    "OSM France": osmFr,
+    "Esri Satellite": esriSatellite,
+};
  
  L.control.layers(baseLayers, null, { position: 'bottomright' }).addTo(map);
  
@@ -100,7 +103,7 @@ CustomMarker(
     map,
     [14.25557,121.40067], // Gate 1
     'src/entrance.png',
-    "info/gate1.html",
+    "info/gate1.php",
     [50, 30],
     ""
 );
@@ -130,7 +133,7 @@ CustomMarker(
 
 function SHSMarker(map, latlng, popupSrc, label) {
 
-    var customMarkerIcon = L.icon({
+        customMarkerIcon = L.icon({
         iconUrl: 'src/shs.png',
         iconSize: [20,20],
     });
@@ -455,7 +458,7 @@ office(
     map,
     'src/registrar.png',
     [14.25658,121.40549], //Registrar
-    'info/lu13.html',
+    'info/sample.html',
     "<i>Registrar's Office</i>"
 )
 
@@ -866,6 +869,7 @@ var crPopupContent = "Comfort Room";
                     map.addLayer(marker);
             });
         });
+
 
     //! ADMIN BUILDING POLYGON
     var polygonCoordinates = [
